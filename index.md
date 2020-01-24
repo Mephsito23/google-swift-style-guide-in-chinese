@@ -616,265 +616,262 @@ let result = anExpression + thatIsMadeUpOf * aLargeNumber +
 
 1. 条件或 switch 语句（例如 `if`、`guard`、`while` 或者 `switch`）开始的任何保留关键字要和它之后的表达式分隔开，如果该表达式以左括号（`(`）开始。
    
-   ~~~ swift
+~~~ swift
 if (x == 0 && y == 0) || z == 0 {
-     // ...
-   }
-   ~~~
-   {:.good}
-   
-   ~~~ swift
-   if(x == 0 && y == 0) || z == 0 {
-     // ...
+  // ...
 }
-   ~~~
-   {:.bad}
+~~~
+{:.good}
+   
+~~~ swift
+if(x == 0 && y == 0) || z == 0 {
+  // ...
+}
+~~~
+{:.bad}
    
 2. 在同一行代码后面的右花括号（`}`）之前，任何左花括号（`{`）之前，后续代码在同一行的左花括号（`{`）之后。
    
-   ~~~ swift
-   let nonNegativeCubes = numbers.map { $0 * $0 * $0 }.filter { $0 >= 0 }
-   ~~~
+~~~ swift
+let nonNegativeCubes = numbers.map { $0 * $0 * $0 }.filter { $0 >= 0 }
+~~~
 {:.good}
    
-   ~~~ swift
-   let nonNegativeCubes = numbers.map { $0 * $0 * $0 } .filter { $0 >= 0 }
-   let nonNegativeCubes = numbers.map{$0 * $0 * $0}.filter{$0 >= 0}
-   ~~~
+~~~ swift
+let nonNegativeCubes = numbers.map { $0 * $0 * $0 } .filter { $0 >= 0 }
+let nonNegativeCubes = numbers.map{$0 * $0 * $0}.filter{$0 >= 0}
 ~~~
-   {:.bad}
+{:.bad}
    
 3. 在二元或者三元运算符的每一侧，包括下面描述的“类运算符”，除了最后的例外：
    
-1. `=` 运算符用在赋值，变量/属性的构造过程以及函数里的默认实参时。
+    1. `=` 运算符用在赋值，变量/属性的构造过程以及函数里的默认实参时。
       
-​~~~ swift
-      var x = 5
-   
-   func sum(_ numbers: [Int], initialValue: Int = 0) {
-       // ...
-   }
-~~~
-      {:.good}
-      
-      ~~~ swift
-      var x=5
-       
-      func sum(_ numbers: [Int], initialValue: Int=0) {
-       // ...
-   }
-      ~~~
-      {:.bad}
-      
-   2. And 符号（`&`）用在协议组合类型时。
-   
-      ~~~ swift
-      func sayHappyBirthday(to person: NameProviding & AgeProviding) {
-        // ...
-      }
-      ~~~
-      {:.good}
-      
-   ~~~ swift
-   func sayHappyBirthday(to person: NameProviding&AgeProviding) {
-       // ...
-      }
-   ~~~
-      {:.bad}
+        ~~~ swift
+        var x = 5
 
-3. 运算符用在函数声明/实现时。
+        func sum(_ numbers: [Int], initialValue: Int = 0) {
+          // ...
+        }
+        ~~~
+        {:.good}
+      
+        ~~~ swift
+        var x=5
+
+        func sum(_ numbers: [Int], initialValue: Int=0) {
+          // ...
+        }
+        ~~~
+        {:.bad}
+      
+    2. And 符号（`&`）用在协议组合类型时。
    
-      ~~~ swift
-   static func == (lhs: MyType, rhs: MyType) -> Bool {
+        ~~~ swift
+        func sayHappyBirthday(to person: NameProviding & AgeProviding) {
         // ...
-      }
-   ~~~
-    {:.good}
-   
-   ~~~ swift
-   static func ==(lhs: MyType, rhs: MyType) -> Bool {
-     // ...
-      }
-   ~~~
-      {:.bad}
-   
-   4. 箭头（`->`）用在函数的返回类型之前时。
-   
-   ~~~ swift
-   func sum(_ numbers: [Int]) -> Int {
+        }
+        ~~~
+        {:.good}
+      
+        ~~~ swift
+        func sayHappyBirthday(to person: NameProviding&AgeProviding) {
         // ...
-      }
-   ~~~
-      {:.good}
+        }
+        ~~~
+        {:.bad}
+
+    3. 运算符用在函数声明/实现时。
    
-   ~~~ swift
-      func sum(_ numbers: [Int])->Int {
-        // ...
-      }
-   ~~~
-      {:.bad}
+        ~~~ swift
+        static func == (lhs: MyType, rhs: MyType) -> Bool {
+          // ...
+        }
+        ~~~
+        {:.good}
    
-   5. **例外：**点（`.`）用在引用值和类型成员时两侧都没有空格。
-      
-   ~~~ swift
-      let width = view.bounds.width
-   ~~~
-      {:.good}
+        ~~~ swift
+        static func ==(lhs: MyType, rhs: MyType) -> Bool {
+          // ...
+        }
+        ~~~
+        {:.bad}
    
-      ~~~ swift
-      let width = view . bounds . width
-      ~~~
-      {:.bad}
+    4. 箭头（`->`）用在函数的返回类型之前时。
    
-   6. **例外：**`..<` 或者 `…` 运算符用在范围表达式时两侧都没空格。
+        ~~~ swift
+        func sum(_ numbers: [Int]) -> Int {
+          // ...
+        }
+        ~~~
+        {:.good}
+   
+        ~~~ swift
+        func sum(_ numbers: [Int])->Int {
+          // ...
+        }
+        ~~~
+        {:.bad}
+   
+    5. **例外：**点（`.`）用在引用值和类型成员时两侧都没有空格。
       
-~~~ swift
-      for number in 1...5 {
-    // ...
-      }
+        ~~~ swift
+        let width = view.bounds.width
+        ~~~
+        {:.good}
+
+        ~~~ swift
+        let width = view . bounds . width
+        ~~~
+        {:.bad}
+   
+    6. **例外：**`..<` 或者 `…` 运算符用在范围表达式时两侧都没空格。
       
-      let substring = string[index..<string.endIndex]
-~~~
-   {:.good}
+        ~~~ swift
+        for number in 1...5 {
+          // ...
+        }
+
+        let substring = string[index..<string.endIndex]
+        ~~~
+        {:.good}
       
-      ~~~ swift
-      for number in 1 ... 5 {
-       // ...
-   }
-      
-      let substring = string[index ..< string.endIndex]
-      ~~~
-      {:.bad}
+        ~~~ swift
+        for number in 1 ... 5 {
+          // ...
+        }
+
+        let substring = string[index ..< string.endIndex]
+        ~~~
+        {:.bad}
 
 4. 逗号（`,`）用在形参列表和元组/数组/字典字面量时，在逗号后面而不是前面。
    
 ~~~ swift
-   let numbers = [1, 2, 3]
+let numbers = [1, 2, 3]
 ~~~
-   {:.good}
+{:.good}
 
-   ~~~ swift
-   let numbers = [1,2,3]
-   let numbers = [1 ,2 ,3]
-   let numbers = [1 , 2 , 3]
-   ~~~
-   {:.bad}
+~~~ swift
+let numbers = [1,2,3]
+let numbers = [1 ,2 ,3]
+let numbers = [1 , 2 , 3]
+~~~
+{:.bad}
 
 5. 如果是下列场景，加在冒号（`:`）后面而不是前面
 
-   1. 父类/协议遵循列表和范型约束。
+    1. 父类/协议遵循列表和范型约束。
 
-      ~~~ swift
-struct HashTable: Collection {
-        // ...
-   }
+        ~~~ swift
+        struct HashTable: Collection {
+          // ...
+        }
+
+        struct AnyEquatable<Wrapped: Equatable>: Equatable {
+          // ...
+        }
+        ~~~
+        {:.good}
+
+        ~~~ swift
+        struct HashTable : Collection {
+          // ...
+        }
+
+        struct AnyEquatable<Wrapped : Equatable> : Equatable {
+          // ...
+        }
+        ~~~
+        {:.bad}
       
-      struct AnyEquatable<Wrapped: Equatable>: Equatable {
-        // ...
-      }
-      ~~~
-      {:.good}
-      
-      ~~~ swift
-   struct HashTable : Collection {
-        // ...
-   }
-      
-      struct AnyEquatable<Wrapped : Equatable> : Equatable {
-        // ...
-      }
-      ~~~
-      {:.bad}
-      
-   2. 函数实参标签和元组元素标签。
+    2. 函数实参标签和元组元素标签。
    
-      ~~~ swift
-let tuple: (x: Int, y: Int)
-      
-      ~~~
-   
-   func sum(_ numbers: [Int]) {
-        // ...
-   }
-      ~~~
-      {:.good}
-      
-      ~~~ swift
-   let tuple: (x:Int, y:Int)
-      let tuple: (x : Int, y : Int)
-      
-      func sum(_ numbers:[Int]) {
-     // ...
-      }
-      
-      func sum(_ numbers : [Int]) {
-        // ...
-      }
-      ~~~
-      {:.bad}
+        ~~~ swift
+        let tuple: (x: Int, y: Int)
+
+        func sum(_ numbers: [Int]) {
+          // ...
+        }
+        ~~~
+        {:.good}
+
+        ~~~ swift
+        let tuple: (x:Int, y:Int)
+        let tuple: (x : Int, y : Int)
+
+        func sum(_ numbers:[Int]) {
+          // ...
+        }
+
+        func sum(_ numbers : [Int]) {
+          // ...
+        }
+        ~~~
+        {:.bad}
    
    3. 变量/属性的类型显式声明。
    
-      ~~~ swift
-   let number: Int = 5
-      ~~~
-   {:.good}
-      
-   ~~~ swift
-   let number:Int = 5
-   let number : Int = 5
-   ~~~
-      {:.bad}
+        ~~~ swift
+        let number: Int = 5
+        ~~~
+        {:.good}
 
-   4. 字典类型缩写。
+        ~~~ swift
+        let number:Int = 5
+        let number : Int = 5
+        ~~~
+        {:.bad}
+
+    4. 字典类型缩写。
    
-      ~~~ swift
-   var nameAgeMap: [String: Int] = []
-      ~~~
-      {:.good}
-      
-   ~~~ swift
-   var nameAgeMap: [String:Int] = []
-   var nameAgeMap: [String : Int] = []
-   ~~~
-   {:.bad}
+        ~~~ swift
+        var nameAgeMap: [String: Int] = []
+        ~~~
+        {:.good}
+
+        ~~~ swift
+        var nameAgeMap: [String:Int] = []
+        var nameAgeMap: [String : Int] = []
+        ~~~
+        {:.bad}
    
    5. 字典字面量。
    
-      ~~~ swift
-   let nameAgeMap = ["Ed": 40, "Timmy": 9]
-      ~~~
-      {:.good}
-      
-      ~~~ swift
-      let nameAgeMap = ["Ed":40, "Timmy":9]
-   let nameAgeMap = ["Ed" : 40, "Timmy" : 9]
-      ~~~
-   {:.bad}
+        ~~~ swift
+        let nameAgeMap = ["Ed": 40, "Timmy": 9]
+        ~~~
+        {:.good}
+
+        ~~~ swift
+        let nameAgeMap = ["Ed":40, "Timmy":9]
+        let nameAgeMap = ["Ed" : 40, "Timmy" : 9]
+        ~~~
+        {:.bad}
    
 6. 行尾注释的双斜杠（`//`），双斜杠之前最少两个空格，之后只加一个空格。
    
 ~~~ swift
-   let initialFactor = 2  // Warm up the modulator.
+let initialFactor = 2  // Warm up the modulator.
 ~~~
-   {:.good}
+{:.good}
 
-   ~~~ swift
-   let initialFactor = 2 //    Warm up the modulator.
-   ~~~
-   {:.bad}
+~~~ swift
+let initialFactor = 2 //    Warm up the modulator.
+~~~
+{:.bad}
 
 7. 数组、字典或元组字面量定义，加在括号外面而不是里面。
    
 ~~~ swift
-   let numbers = [1, 2, 3]
+let numbers = [1, 2, 3]
 ~~~
-   {:.good}
+{:.good}
 
-   ~~~ swift
-   let numbers = [ 1, 2, 3 ]
-   ~~~
-   {:.bad}
+~~~ swift
+let numbers = [ 1, 2, 3 ]
+~~~
+{:.bad}
 
 ### 水平对齐
 
@@ -2323,7 +2320,6 @@ func execute(command: String, stdin: String) -> String {
     // ...
   }
   ~~~
-  
   {:.bad}
 
 通常来说，如果你发现你写的注释只是简单地重复源码中显而易见的事，并用类似"用于表示"的词语进行美化，那么将这些注释完全去掉。
